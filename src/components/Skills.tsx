@@ -29,20 +29,20 @@ interface CertificationItem {
 }
 
 const certifications: CertificationItem[] = [
-    {
-        name: "soon to be a AWS Certified Data Engineer",
-        issuer: "Amazon Web Services",
-        date: "Coming Soon",
-        credentialLink: "#", // Add actual link
-        icon: FaCertificate
-    },
-    {
-      name: "soon to be a AWS Certified Cloud Practitioner",
-      issuer: "Amazon Web Services",
-      date: "Coming Soon",
-      credentialLink: "#", // Add actual link
-      icon: FaCertificate
-  },
+  //   {
+  //       name: "soon to be a AWS Certified Data Engineer",
+  //       issuer: "Amazon Web Services",
+  //       date: "Coming Soon",
+  //       credentialLink: "#", // Add actual link
+  //       icon: FaCertificate
+  //   },
+  //   {
+  //     name: "soon to be a AWS Certified Cloud Practitioner",
+  //     issuer: "Amazon Web Services",
+  //     date: "Coming Soon",
+  //     credentialLink: "#", // Add actual link
+  //     icon: FaCertificate
+  // },
     {
         name: "IBM Mainframe Advanced Concepts Badge",
         issuer: "IBM",

@@ -52,7 +52,7 @@ const experienceData: ExperienceData = {
       description: [
         'Created a full-stack web app using React, Tailwind CSS, and Node.js.',
         'Developed on a full-stack web app using React, Tailwind CSS, and Node.js, integrating CI/CD pipelines with GitHub Actions to automate testing and deployment while utilizing Agile practices for iterative development and continuous feedback',
-        'Integrated a secure payment platform with Stripe’s API, ensuring PCI-DSS compliance, user-friendly design, and error handling, while monitoring KPIs such as transaction success',
+        'Integrated a secure payment platform with Stripe&apos;s API, ensuring PCI-DSS compliance, user-friendly design, and error handling, while monitoring KPIs such as transaction success',
         'Implemented SQL scripts to manage inventory and database updates, optimizing product tracking and utilizing CI/CD processes for continuous testing and deployment.',
         'Analyzed website performance using Google PageSpeed Insights and implemented lazy loading, resulting in a 22% improvement in loading times.'
     ],     
@@ -252,38 +252,64 @@ export default function Experience() {
             >
               <FaTimes size={24} />
             </button>
-
-            <div className="flex gap-4 items-start mb-4">
-               {/* Icon/Logo */}
-                <div className="flex-shrink-0 w-16 h-16 bg-gray-700 rounded-md flex items-center justify-center text-[color:var(--accent)] relative overflow-hidden border border-gray-600">
-                  {selectedExperience.logoSrc && <Image src={selectedExperience.logoSrc} alt={`${selectedExperience.company} logo`} fill style={{objectFit: 'contain'}} />} 
-                  {selectedExperience.icon && !selectedExperience.logoSrc && <selectedExperience.icon size={32} />}
+            <div className="bg-gray-800 text-white rounded-lg overflow-hidden max-w-3xl mx-auto">
+              <div className="p-6">
+                <div className="flex items-start gap-4 mb-6">
+                  {selectedExperience.logoSrc && (
+                    <div className="w-16 h-16 relative bg-white rounded-md overflow-hidden flex-shrink-0">
+                      <Image src={selectedExperience.logoSrc} alt={`${selectedExperience.company} logo`} fill style={{objectFit: 'contain'}} />
+                    </div>
+                  )}
+                  {selectedExperience.icon && !selectedExperience.logoSrc && (
+                    <div className="w-16 h-16 bg-gray-700 rounded-md flex items-center justify-center text-[color:var(--accent)]">
+                      <selectedExperience.icon size={32} />
+                    </div>
+                  )}
+                  <div>
+                    <h3 className="text-2xl font-bold text-white">
+                      {selectedExperience.title} @ <span className="text-[color:var(--accent)]">{selectedExperience.company}</span>
+                    </h3>
+                    <p className="text-gray-300">{selectedExperience.location} | {selectedExperience.dates}</p>
+                    {selectedExperience.companyLink && (
+                      <a 
+                        href={selectedExperience.companyLink} 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 mt-2 text-[color:var(--accent)] hover:underline"
+                      >
+                        Visit Company <FaExternalLinkAlt size={12} />
+                      </a>
+                    )}
+                  </div>
                 </div>
-                {/* Title/Company/Dates */}
+                
+                <div className="mb-6">
+                  <h4 className="text-lg font-medium mb-2 text-[color:var(--accent)]">Description</h4>
+                  {Array.isArray(selectedExperience.description) ? (
+                    <ul className="list-disc pl-5 space-y-2">
+                      {selectedExperience.description.map((item, i) => (
+                        <li key={i} className="text-gray-200">{item}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-gray-200">{selectedExperience.description}</p>
+                  )}
+                </div>
+                
                 <div>
-                    <h3 className="text-xl font-semibold text-white">{selectedExperience.title} @ <span className="text-[color:var(--accent)] font-medium">{selectedExperience.company}</span></h3>
-                    <p className="text-sm text-gray-400">{selectedExperience.location} | {selectedExperience.dates}</p>
+                  <h4 className="text-lg font-medium mb-2 text-[color:var(--accent)]">Technologies</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedExperience.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 bg-gray-700 text-white rounded-full text-sm"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-            </div>
-
-            {/* Description Points */}
-            <ul className="space-y-2 mb-6 list-disc list-inside text-gray-300 text-sm">
-                {Array.isArray(selectedExperience.description) 
-                    ? selectedExperience.description.map((point, i) => <li key={i}>{point}</li>) 
-                    : <li>{selectedExperience.description}</li>
-                }
-            </ul>
-
-            {/* Technologies */}
-             <div className="flex flex-wrap gap-2">
-                {selectedExperience.technologies.map((tech) => (
-                    <span
-                    key={tech}
-                    className="px-3 py-1 bg-gray-700 text-white rounded-full text-xs border border-gray-600 hover:border-[color:var(--accent)] transition-colors cursor-default"
-                    >
-                    {tech}
-                    </span>
-                ))}
+              </div>
             </div>
           </motion.div>
         )}

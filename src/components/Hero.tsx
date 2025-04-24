@@ -53,16 +53,16 @@ export default function Hero() {
             <h1
               className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 text-black dark:text-white"
             >
-              Hi, I'm Srini Vankadari
+              Hi, I&apos;m Srini Vankadari
             </h1>
-            <motion.h2
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
               className="text-xl sm:text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-6 sm:mb-8"
             >
               Software Engineering Student @ UWO 
-            </motion.h2>
+            </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

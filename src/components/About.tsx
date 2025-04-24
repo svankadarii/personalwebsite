@@ -5,13 +5,13 @@ export default function About() {
         <h2 className="text-4xl font-bold text-center mb-12 text-black dark:text-white">About Me</h2>
         <div className="max-w-4xl mx-auto">
           <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-            I'm Srini Vankadari, a passionate Full Stack Developer with a strong focus on creating
+            I&apos;m Srini Vankadari, a passionate Full Stack Developer with a strong focus on creating
             efficient, scalable, and user-friendly applications. With expertise in
             both frontend and backend technologies, I strive to build solutions
             that make a difference.
           </p>
           <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-            My journey in software development began with a deep curiosity for technology and problem-solving. Since then, I've
+            My journey in software development began with a deep curiosity for technology and problem-solving. Since then, I&apos;ve
             worked on various projects ranging from small business websites to
             complex web applications.
           </p>
