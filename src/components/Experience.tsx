@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaBuilding, FaBriefcase, FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
+import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
 import Modal from 'react-modal'
 import Image from 'next/image' // Import Image for logos
 
@@ -138,7 +138,7 @@ export default function Experience() {
           animate={{ opacity: 1, y: 0 }}
           className="text-4xl font-bold text-center mb-12 text-black dark:text-white"
         >
-          Places I've Worked
+          Places I&apos;ve Worked
         </motion.h2>
 
         {/* Tabs - Reduced padding on mobile */}
