@@ -2,25 +2,68 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --foreground: #000000;
+  --accent: #000033; /* Very Dark Blue for light mode */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #ffffff;
+    --accent: #6495ED; /* Cornflower Blue for dark mode */
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* --- React Modal Styles --- */
+.ModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85); /* Darker overlay */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
+}
+
+.ModalContent {
+  position: relative;
+  max-width: 600px;
+  width: 90%;
+  background: #181c2c; /* Changed background to dark blue */
+  padding: 2rem;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid #555; /* Slightly lighter border for contrast */
+  color: #ffffff; /* Changed text to white for contrast */
+  transform: scale(0.95);
+  opacity: 0;
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+.ReactModal__Content--after-open{
+    opacity: 1;
+    transform: scale(1);
+}
+
+.ReactModal__Content--before-close{
+    opacity: 0;
+    transform: scale(0.95);
 }
