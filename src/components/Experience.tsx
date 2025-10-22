@@ -31,21 +31,21 @@ const experienceData: ExperienceData = {
     {
       // icon: FaBuilding, 
       logoSrc: "/bmo.jpg", // Example: Assuming you have bmo.png in public/logos
-      title: 'Junior Developer Intern',
+      title: 'SoftwareDeveloper Intern',
       company: 'BMO',
       // companyLink: 'https://www.bmo.com/',
       location: 'Toronto, ON',
-      dates: 'May 2025 - Present',
+      dates: 'May 2025 - Aug 2025',
       description: [
           'Developing and maintaining features for internal banking applications within the IBM Mainframe.',
           'Incoming Summer 2025',
       ],
-      technologies: ['IBM Mainframe', 'Assembly', 'JCL', 'Python', 'VSAM'],
+      technologies: ['IBM Mainframe', 'Assembly', 'JCL', 'Python', 'Pandas', 'PyPDF'],
     },
     {
       logoSrc: "/MomentumMind.jpg", // Example: Assuming you have bmo.png in public/logos
       title: 'Web Developer Intern',
-      company: 'MomentumMind',
+      company: 'MomentumMind',  
       // companyLink: '#',
       location: 'Remote',
       dates: 'May 2024 - Aug 2024',

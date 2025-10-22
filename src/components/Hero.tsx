@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 const roles = [
-  "Junior Developer Intern @ BMO",
+  "Prev. Software Developer Intern @ BMO",
   "Soccer Enthusiast",
   "Music Connoisseur",
 ]
