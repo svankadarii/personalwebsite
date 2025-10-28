@@ -29,25 +29,18 @@ interface CertificationItem {
 }
 
 const certifications: CertificationItem[] = [
-  //   {
-  //       name: "soon to be a AWS Certified Data Engineer",
-  //       issuer: "Amazon Web Services",
-  //       date: "Coming Soon",
-  //       credentialLink: "#", // Add actual link
-  //       icon: FaCertificate
-  //   },
-  //   {
-  //     name: "soon to be a AWS Certified Cloud Practitioner",
-  //     issuer: "Amazon Web Services",
-  //     date: "Coming Soon",
-  //     credentialLink: "#", // Add actual link
-  //     icon: FaCertificate
-  // },
+    {
+        name: "AWS Certified Cloud Practitioner",
+        issuer: "Amazon Web Services",
+        date: "Issued Dec 2024",
+        credentialLink: "#", // Add actual credential link when available
+        icon: FaCertificate
+    },
     {
         name: "IBM Mainframe Advanced Concepts Badge",
         issuer: "IBM",
         date: "Issued Dec 2024",
-        credentialLink: "https://www.credly.com/badges/030a1c34-16a5-434b-910d-4a43016b5d07/public_url", // Add actual link
+        // credentialLink: "https://www.credly.com/badges/030a1c34-16a5-434b-910d-4a43016b5d07/public_url", // Add actual link
         icon: FaCertificate
     },
     // Add more certifications here
