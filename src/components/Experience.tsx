@@ -37,8 +37,10 @@ const experienceData: ExperienceData = {
       location: 'Toronto, ON',
       dates: 'May 2025 - Aug 2025',
       description: [
-          'Developing and maintaining features for internal banking applications within the IBM Mainframe.',
-          'Incoming Summer 2025',
+          'Developed an internal automation tool using PyPDF and Pandas to extract and populate PDF forms with branch data, streamlining document workflows and improving operational efficiency.',
+          'Built a data transformation pipeline using IBM Assembler and Python to convert encoded branch messages intostructured tables, processing 1,000+ records and exporting them into Excel for non-technical teams, cutting analysistime by 40%',
+          'Conducted end-to-end quality assurance testing on applications, including unit testing, data validation, and edge case analysis, ensuring reliability, accuracy, and alignment with user requirements throughout the Software Development Life Cycle',
+          'Collaborated with cross-functional teams to develop and pitch an AI-driven incident response strategy to C-suite executives, demonstrating leadership, adaptability, and strong interpersonal communication.',
       ],
       technologies: ['IBM Mainframe', 'Assembly', 'JCL', 'Python', 'Pandas', 'PyPDF'],
     },
@@ -244,65 +246,66 @@ export default function Experience() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3 }}
+            className="relative"
           >
             <button 
               onClick={closeModal} 
-              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10"
+              className="absolute top-3 right-3 text-gray-400 hover:text-white transition-colors z-20"
               aria-label="Close modal"
             >
-              <FaTimes size={24} />
+              <FaTimes size={20} />
             </button>
-            <div className="bg-gray-800 text-white rounded-lg overflow-hidden max-w-3xl mx-auto">
-              <div className="p-6">
-                <div className="flex items-start gap-4 mb-6">
+            <div className="bg-gray-800 text-white rounded-lg overflow-hidden max-w-full mx-auto">
+              <div className="p-4">
+                <div className="flex items-start gap-3 mb-4">
                   {selectedExperience.logoSrc && (
-                    <div className="w-16 h-16 relative bg-white rounded-md overflow-hidden flex-shrink-0">
+                    <div className="w-12 h-12 relative bg-white rounded-md overflow-hidden flex-shrink-0">
                       <Image src={selectedExperience.logoSrc} alt={`${selectedExperience.company} logo`} fill style={{objectFit: 'contain'}} />
                     </div>
                   )}
                   {selectedExperience.icon && !selectedExperience.logoSrc && (
-                    <div className="w-16 h-16 bg-gray-700 rounded-md flex items-center justify-center text-[color:var(--accent)]">
-                      <selectedExperience.icon size={32} />
+                    <div className="w-12 h-12 bg-gray-700 rounded-md flex items-center justify-center text-[color:var(--accent)]">
+                      <selectedExperience.icon size={24} />
                     </div>
                   )}
                   <div>
-                    <h3 className="text-2xl font-bold text-white">
+                    <h3 className="text-xl font-bold text-white">
                       {selectedExperience.title} @ <span className="text-[color:var(--accent)]">{selectedExperience.company}</span>
                     </h3>
-                    <p className="text-gray-300">{selectedExperience.location} | {selectedExperience.dates}</p>
+                    <p className="text-sm text-gray-300">{selectedExperience.location} | {selectedExperience.dates}</p>
                     {selectedExperience.companyLink && (
                       <a 
                         href={selectedExperience.companyLink} 
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 mt-2 text-[color:var(--accent)] hover:underline"
+                        className="inline-flex items-center gap-1 mt-1 text-sm text-[color:var(--accent)] hover:underline"
                       >
-                        Visit Company <FaExternalLinkAlt size={12} />
+                        Visit Company <FaExternalLinkAlt size={10} />
                       </a>
                     )}
                   </div>
                 </div>
                 
-                <div className="mb-6">
-                  <h4 className="text-lg font-medium mb-2 text-[color:var(--accent)]">Description</h4>
+                <div className="mb-4">
+                  <h4 className="text-base font-medium mb-2 text-[color:var(--accent)]">Description</h4>
                   {Array.isArray(selectedExperience.description) ? (
-                    <ul className="list-disc pl-5 space-y-2">
+                    <ul className="list-disc pl-4 space-y-1.5">
                       {selectedExperience.description.map((item, i) => (
-                        <li key={i} className="text-gray-200">{item}</li>
+                        <li key={i} className="text-sm text-gray-200">{item}</li>
                       ))}
                     </ul>
                   ) : (
-                    <p className="text-gray-200">{selectedExperience.description}</p>
+                    <p className="text-sm text-gray-200">{selectedExperience.description}</p>
                   )}
                 </div>
                 
                 <div>
-                  <h4 className="text-lg font-medium mb-2 text-[color:var(--accent)]">Technologies</h4>
-                  <div className="flex flex-wrap gap-2">
+                  <h4 className="text-base font-medium mb-2 text-[color:var(--accent)]">Technologies</h4>
+                  <div className="flex flex-wrap gap-1.5">
                     {selectedExperience.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 bg-gray-700 text-white rounded-full text-sm"
+                        className="px-2 py-0.5 bg-gray-700 text-white rounded-full text-xs"
                       >
                         {tech}
                       </span>

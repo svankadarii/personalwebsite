@@ -45,10 +45,12 @@ body {
 
 .ModalContent {
   position: relative;
-  max-width: 600px;
+  max-width: 500px;
   width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
   background: #181c2c; /* Changed background to dark blue */
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 8px;
   outline: none;
   border: 1px solid #555; /* Slightly lighter border for contrast */

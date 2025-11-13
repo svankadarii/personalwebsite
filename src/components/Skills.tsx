@@ -32,7 +32,7 @@ const certifications: CertificationItem[] = [
     {
         name: "AWS Certified Cloud Practitioner",
         issuer: "Amazon Web Services",
-        date: "Issued Dec 2024",
+        date: "Issued Sep 2025",
         credentialLink: "#", // Add actual credential link when available
         icon: FaCertificate
     },
