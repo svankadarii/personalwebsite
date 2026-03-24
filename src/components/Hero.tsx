@@ -137,8 +137,7 @@ export default function Hero() {
               className="text-sm sm:text-base leading-relaxed mb-7"
               style={{ color: 'var(--text-muted)', maxWidth: '420px' }}
             >
-              I build clean, scalable products at the intersection of great engineering
-              and intuitive design. Passionate about turning ideas into real, impactful software.
+              I build clean, scalable products at the intersection of great engineering and intuitive design. Passionate about turning ideas into real, impactful software.
             </motion.p>
 
             {/* Primary buttons */}
@@ -148,7 +147,7 @@ export default function Hero() {
               className="flex flex-wrap gap-3 justify-center md:justify-start mb-5"
             >
               <a
-                href="/Srini Vankadari SWE Resume.pdf"
+                href="/Srini_Vankadari_SWE_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 hover:scale-105"

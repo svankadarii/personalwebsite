@@ -15,8 +15,10 @@ interface ExperienceItem {
   companyLink?: string;
   location: string;
   dates: string;
-  description: string | string[]; // Allow string array for bullet points
-  technologies: string[];
+  description: React.ReactNode | React.ReactNode[]; // Allow React nodes for styling (like bold text)
+  shortDescription?: React.ReactNode; // Optional short description for the card front
+  technologies?: string[];
+  skills?: string[];
 }
 
 interface ExperienceData {
@@ -30,71 +32,73 @@ const experienceData: ExperienceData = {
   professional: [
     {
       // icon: FaBuilding, 
-      logoSrc: "/bmo.jpg", // Example: Assuming you have bmo.png in public/logos
+      logoSrc: "/bmo.jpg",
       title: 'SoftwareDeveloper Intern',
       company: 'BMO',
-      // companyLink: 'https://www.bmo.com/',
       location: 'Toronto, ON',
       dates: 'May 2025 - Aug 2025',
+      shortDescription: 'Created Python-based automation tools and data pipelines on the IBM Mainframe, reducing manual analysis time and streamlining enterprise document workflows',
       description: [
-          'Developed an internal automation tool using PyPDF and Pandas to extract and populate PDF forms with branch data, streamlining document workflows and improving operational efficiency.',
-          'Built a data transformation pipeline using IBM Assembler and Python to convert encoded branch messages intostructured tables, processing 1,000+ records and exporting them into Excel for non-technical teams, cutting analysistime by 40%',
-          'Conducted end-to-end quality assurance testing on applications, including unit testing, data validation, and edge case analysis, ensuring reliability, accuracy, and alignment with user requirements throughout the Software Development Life Cycle',
-          'Collaborated with cross-functional teams to develop and pitch an AI-driven incident response strategy to C-suite executives, demonstrating leadership, adaptability, and strong interpersonal communication.',
+        <>Developed an internal automation tool using PyPDF and Pandas to extract and populate PDF forms with branch data, streamlining document workflows and improving operational efficiency.</>,
+        <>Built a data transformation pipeline using IBM Assembler and Python to convert encoded branch messages into structured tables, processing <b>1,000+</b> records and exporting them into Excel for non-technical teams, cutting analysis time by <b>40%</b>.</>,
+        <>Conducted end-to-end quality assurance testing on applications, including unit testing, data validation, and edge case analysis, ensuring reliability, accuracy, and alignment with user requirements throughout the Software Development Life Cycle.</>,
+        <>Collaborated with cross-functional teams to develop and pitch an AI-driven incident response strategy that increases operational efficiency by <b>55%</b> to C-suite executives, demonstrating leadership, adaptability, and strong interpersonal communication.</>,
       ],
       technologies: ['IBM Mainframe', 'Assembly', 'JCL', 'Python', 'Pandas', 'PyPDF'],
     },
     {
-      logoSrc: "/MomentumMind.jpg", // Example: Assuming you have bmo.png in public/logos
+      logoSrc: "/momentummind_research_logo.jpg",
       title: 'Web Developer Intern',
-      company: 'MomentumMind',  
-      // companyLink: '#',
+      company: 'MomentumMind',
       location: 'Remote',
       dates: 'May 2024 - Aug 2024',
+      shortDescription: 'Built an end-to-end scalable web application with React and Node.js, featuring automated CI/CD pipelines and a real-time Stripe payment integration.',
       description: [
-        'Created a full-stack web app using React, Tailwind CSS, and Node.js.',
-        'Developed on a full-stack web app using React, Tailwind CSS, and Node.js, integrating CI/CD pipelines with GitHub Actions to automate testing and deployment while utilizing Agile practices for iterative development and continuous feedback',
-        'Integrated a secure payment platform with Stripe&apos;s API, ensuring PCI-DSS compliance, user-friendly design, and error handling, while monitoring KPIs such as transaction success',
-        'Implemented SQL scripts to manage inventory and database updates, optimizing product tracking and utilizing CI/CD processes for continuous testing and deployment.',
-        'Analyzed website performance using Google PageSpeed Insights and implemented lazy loading, resulting in a 22% improvement in loading times.'
-    ],     
-     technologies: ['React', 'Node.js', 'JavaScript', 'Tailwind.css', 'Agile'],
+        <>Developed and deployed a scalable application using React, Tailwind CSS, and Node.js, implementing CI/CD workflows in GitHub Actions that cut deployment time by <b>45%</b> and minimized production errors.</>,
+        <>Designed and shipped a real-time payment system using Stripe Webhooks to automate billing status updates, reducing manual transaction verification by <b>10 hours</b> per week.</>,
+        <>Optimized PostgreSQL inventory queries and indexing strategies, integrating automated schema validation into CI/CD to prevent deployment errors and improve query execution speed by <b>25%</b>.</>
+      ],
+      technologies: ['React', 'Node.js', 'JavaScript', 'Tailwind CSS', 'PostgreSQL', 'Stripe', 'GitHub Actions', 'Agile'],
     },
-    
+
     // Add more professional experiences here
   ],
   leadership: [
     {
-      // icon: FaBuilding, // Replace with a relevant icon if needed
-      logoSrc: "/wcs.jpg", // Example
+
+      logoSrc: "/wcs.jpg",
       title: 'Project Manager',
       company: 'Western Cyber Society',
-      companyLink: 'https://westerncybersociety.com/', // Example link
       location: 'London, ON',
-      dates: 'Oct 2024 - Apr 2025',
+      dates: 'Oct 2024 - Apr 2026',
+      shortDescription: 'Directed a team of 5 developers in an agile environment to architect BankFrame, a full-stack banking simulator utilizing IBM Mainframe and RESTful APIs.',
       description: [
-          'Led a team of 5 students in agile environment to create BankFrame, a banking application using IBM Mainframe.',
-          'Leading a team of 5 to develop BankFrame, a replica of a top-five Canadian bank, utilizing IBM Mainframe, IBM DB2, Java, and RESTful APIs to implement secure user accounts, deposits, withdrawals, and transfers, ensuring efficient transaction processing',
-          'Developed a NoHup Python script to automate IBM DB2 backups, ensuring zero downtime and eliminating the need for manual job requests',
-          'Presented to RBC, TD, BMO, CIBC, Scotiabank, Sunlife, IBM, Morgon Stanley, and more'
+        <strong key="h1" data-header style={{ color: 'var(--foreground)' }}>2025-2026 Term (LendIQ):</strong>,
+        <>Leading a team of 5 in <b>Agile</b> for the development of a real-time credit risk evaluation platform on an IBM z/OS mainframe using zCX, integrating a <b>Node.js</b> frontend with a <b>FastAPI</b> backend and executing low-latency ML inference via an ONNX-hosted XGBoost model containerized using Docker.</>,
+        <>Implemented explainable AI using <b>SHAP</b> to provide feature-level transparency for credit decisions, persisting risk scores and explanations in <b>IBM Db2</b> to support auditability, compliance, and downstream analysis.</>,
+        <strong key="h2" data-header style={{ color: 'var(--foreground)', marginTop: '0.8rem', display: 'block' }}>2024-2025 Term (BankFrame):</strong>,
+        <>Led a team of 5 students to develop BankFrame, a replica of a top-five Canadian bank, utilizing <b>IBM Mainframe</b>, <b>IBM Db2</b>, Java, and RESTful APIs to implement secure accounts and efficient transaction processing.</>,
+        <>Developed a NoHup Python script to automate <b>IBM Db2</b> backups, ensuring zero downtime and eliminating the need for manual job requests.</>,
+        <hr></hr>,
+        <>Presented both BankFrame and LendIQ to industry partners including RBC, TD, BMO, CIBC, Scotiabank, Sun Life, IBM, and Morgan Stanley.</>
       ],
-      technologies: ['Project Management', 'Team Leadership', 'IBM Mainframe', 'Java', 'IBM DB2', 'React', 'Agile', 'JCL', 'Bash', 'Linux'],
+      technologies: ['Project Management', 'Agile', 'IBM z/OS', 'IBM Db2', 'Java', 'Python', 'Node.js', 'FastAPI', 'Docker', 'XGBoost', 'SHAP', 'ONNX', 'REST APIs'],
     },
     // Add more leadership experiences here
     {
-      // icon: FaBuilding, // Replace with a relevant icon if needed
-      logoSrc: "/morrissette.jpg", // Example
+      logoSrc: "/morrissette.jpg",
       title: 'Entrepreneurship Ambassador',
       company: 'Morrissette Entrepreneurship Institute',
       location: 'London, ON',
       dates: 'Oct 2024 - Mar 2025',
+      shortDescription: 'Spearheaded campus-wide entrepreneurial initiatives, driving student engagement through the strategic planning and execution of high-impact workshops and events.',
       description: [
         'Planned and executed a series of workshops and events to promote entrepreneurship and innovation.',
         'Tracked Headcount and attendance for all events and brainstormed new ideas to promote entrepreneurship and innovation throughout campus',
         'Demonstrated strong organizational, communication, and adaptability skills by planning events, managing logistics, ensuring smooth execution, and tracking participant engagement to optimize future events'
-  
-    ],
-      technologies: ['Event Planning', 'Presenting', 'Organization', 'Communication'],
+
+      ],
+      skills: ['Event Planning', 'Presenting', 'Organization', 'Communication'],
     },
   ],
 }
@@ -193,7 +197,7 @@ export default function Experience() {
               <motion.div
                 key={`${activeTab}-${index}`}
                 variants={contentVariants} // Inherit item animation
-                onClick={() => openModal(item)} 
+                onClick={() => openModal(item)}
                 // MODIFIED: Stack layout vertically on small screens
                 className="p-4 sm:p-6 rounded-xl shadow-md flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-start cursor-pointer transition-all duration-200"
                 style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
@@ -202,29 +206,29 @@ export default function Experience() {
               >
                 {/* Icon/Logo */}
                 <div className="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center relative overflow-hidden pointer-events-none" style={{ background: 'var(--surface-2)', color: 'var(--accent)' }}>
-                  {item.logoSrc && <Image src={item.logoSrc} alt={`${item.company} logo`} fill style={{objectFit: 'contain'}} />} 
+                  {item.logoSrc && <Image src={item.logoSrc} alt={`${item.company} logo`} fill style={{ objectFit: 'contain' }} />}
                   {item.icon && !item.logoSrc && <item.icon size={24} />}
                 </div>
 
                 {/* Details */}
-                <div className="flex-grow pointer-events-none w-full text-center sm:text-left"> {/* Ensure text aligns center when stacked */} 
+                <div className="flex-grow pointer-events-none w-full text-center sm:text-left"> {/* Ensure text aligns center when stacked */}
                   <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start mb-2">
                     <div className="mb-2 sm:mb-0">
                       <h3 className="text-lg sm:text-xl font-semibold" style={{ color: 'var(--foreground)' }}>{item.title} @ <span style={{ color: 'var(--accent)' }} className="font-medium">{item.company}</span></h3>
                       <p className="text-xs sm:text-sm" style={{ color: 'var(--text-muted)' }}>{item.location} | {item.dates}</p>
                     </div>
-                    <button 
-                      onClick={(e) => { e.stopPropagation(); openModal(item); }} 
-                      className="hidden sm:flex items-center gap-1 px-3 py-1 border rounded-md text-xs transition-colors pointer-events-auto" style={{ borderColor: 'var(--border)', color: 'var(--text-muted)' }} onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor='var(--accent)'; el.style.color='var(--accent)'; }} onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor='var(--border)'; el.style.color='var(--text-muted)'; }}
+                    <button
+                      onClick={(e) => { e.stopPropagation(); openModal(item); }}
+                      className="hidden sm:flex items-center gap-1 px-3 py-1 border rounded-md text-xs transition-colors pointer-events-auto" style={{ borderColor: 'var(--border)', color: 'var(--text-muted)' }} onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--accent)'; el.style.color = 'var(--accent)'; }} onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border)'; el.style.color = 'var(--text-muted)'; }}
                     >
                       <FaExternalLinkAlt /> Details
                     </button>
                   </div>
                   <p className="text-sm mb-4" style={{ color: 'var(--text-muted)' }}>
-                    {Array.isArray(item.description) ? item.description[0] : item.description.substring(0, 100) + (item.description.length > 100 ? '...' : '')}
+                    {item.shortDescription || (Array.isArray(item.description) ? item.description[0] : (typeof item.description === 'string' ? item.description.substring(0, 100) + (item.description.length > 100 ? '...' : '') : item.description))}
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-                    {item.technologies.map((tech) => (
+                    {(item.technologies || item.skills || []).map((tech) => (
                       <span
                         key={tech}
                         className="px-2 py-0.5 rounded-full text-xs border" style={{ background: 'var(--surface-2)', color: 'var(--text-muted)', borderColor: 'var(--border)' }}
@@ -233,12 +237,12 @@ export default function Experience() {
                       </span>
                     ))}
                   </div>
-                  <button 
-                      onClick={(e) => { e.stopPropagation(); openModal(item); }} 
-                      className="sm:hidden mt-3 inline-flex items-center gap-1 px-3 py-1 border rounded-md text-xs transition-colors pointer-events-auto" style={{ borderColor: 'var(--border)', color: 'var(--text-muted)' }}
-                    >
-                      <FaExternalLinkAlt /> Details
-                    </button>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); openModal(item); }}
+                    className="sm:hidden mt-3 inline-flex items-center gap-1 px-3 py-1 border rounded-md text-xs transition-colors pointer-events-auto" style={{ borderColor: 'var(--border)', color: 'var(--text-muted)' }}
+                  >
+                    <FaExternalLinkAlt /> Details
+                  </button>
                 </div>
               </motion.div>
             ))}
@@ -339,26 +343,33 @@ export default function Experience() {
                   Description
                 </h4>
                 <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column' as const, gap: '0.6rem' }}>
-                  {(Array.isArray(selectedExperience.description) ? selectedExperience.description : [selectedExperience.description]).map((point, i) => (
-                    <li key={i} style={{ display: 'flex', gap: '0.6rem', fontSize: '0.85rem', lineHeight: 1.6, color: 'var(--text-muted)' }}>
-                      <span style={{ marginTop: 7, width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
-                      {point}
-                    </li>
-                  ))}
+                  {(Array.isArray(selectedExperience.description) ? selectedExperience.description : [selectedExperience.description]).map((point, i) => {
+                    const isHeader = typeof point === 'object' && point !== null && (point as any)?.props?.['data-header'];
+                    const isDivider = typeof point === 'object' && point !== null && (point as any)?.type === 'hr';
+                    const hideBullet = isHeader || isDivider;
+                    return (
+                      <li key={i} style={{ display: 'flex', gap: hideBullet ? '0' : '0.6rem', fontSize: '0.85rem', lineHeight: 1.6, color: 'var(--text-muted)' }}>
+                        {!hideBullet && <span style={{ marginTop: 7, width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />}
+                        <div style={{ width: '100%' }}>{point}</div>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
-              <div>
-                <h4 style={{ margin: '0 0 0.75rem', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'var(--accent)' }}>
-                  Technologies
-                </h4>
-                <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.4rem' }}>
-                  {selectedExperience.technologies.map(tech => (
-                    <span key={tech} style={{ padding: '0.2rem 0.7rem', borderRadius: 999, fontSize: '0.75rem', fontWeight: 500, background: 'var(--surface-2)', color: 'var(--text-muted)', border: '1px solid var(--border)' }}>
-                      {tech}
-                    </span>
-                  ))}
+              {(selectedExperience.technologies || selectedExperience.skills) && (
+                <div>
+                  <h4 style={{ margin: '0 0 0.75rem', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'var(--accent)' }}>
+                    {selectedExperience.technologies ? 'Technologies' : 'Skills'}
+                  </h4>
+                  <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.4rem' }}>
+                    {(selectedExperience.technologies || selectedExperience.skills || []).map(tech => (
+                      <span key={tech} style={{ padding: '0.2rem 0.7rem', borderRadius: 999, fontSize: '0.75rem', fontWeight: 500, background: 'var(--surface-2)', color: 'var(--text-muted)', border: '1px solid var(--border)' }}>
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

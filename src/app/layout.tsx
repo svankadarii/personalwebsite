@@ -22,7 +22,21 @@ export const metadata: Metadata = {
   title: "Srini Vankadari",
   description: "Welcome to Srini Vankadari's personal portfolio website",
   icons: {
-    icon: "/sv.jpg",
+    icon: "/KinHeadShot.jpg",
+    apple: "/KinHeadShot.jpg",
+  },
+  openGraph: {
+    title: "Srini Vankadari | Personal Portfolio",
+    description: "Software Engineering Student @ Western University building clean, scalable products.",
+    type: "website",
+    images: [
+      {
+        url: "/KinHeadShot.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Srini Vankadari",
+      },
+    ],
   },
 };
 
