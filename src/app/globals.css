@@ -17,16 +17,16 @@
 
 /* ── Light mode ── */
 html.light {
-  --background: #faf8f5;
+  --background: #e8e5e0;
   --foreground: #1a1714;
   --accent: #b5892e;
   --accent-hover: #c9a84c;
   --accent-muted: rgba(181, 137, 46, 0.12);
-  --surface: #f0ece5;
-  --surface-2: #e8e2d8;
+  --surface: #ddd9d2;
+  --surface-2: #d4d0c9;
   --border: rgba(181, 137, 46, 0.22);
-  --text-muted: #6b5e50;
-  --header-bg: rgba(250, 248, 245, 0.9);
+  --text-muted: #5a5045;
+  --header-bg: rgba(232, 229, 224, 0.92);
   --header-border: rgba(181, 137, 46, 0.15);
 }
 
