@@ -8,8 +8,8 @@ import { FiSun, FiMoon } from 'react-icons/fi'
 const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'Experience', href: '#experience' },
-  { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Skills', href: '#skills' },
 ]
 
 export default function Header() {

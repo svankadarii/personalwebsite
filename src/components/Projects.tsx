@@ -2,14 +2,15 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import Image from 'next/image'
 
 const projects = [
   {
     title: 'Amazon Price Tracker Web Scrapper',
     description: 'Scrape Amazon Products and get the price history',
     technologies: ['Python', 'Next.js', 'SQL', 'BeautifulSoup', 'D3.js', 'FastAPI'],
-    image: '/project1.jpg',
-    link: '#',
+    image: '/amazonpricetrackerpng.png',
+    link: 'https://github.com/svankadarii/AmazonPriceTracker',
   },
   {
     title: 'Campus Saftety App',
@@ -63,13 +64,25 @@ export default function Projects() {
               onMouseLeave={e => ((e.currentTarget as HTMLElement).style.borderColor = 'var(--border)')}
             >
               <div className="h-48 relative overflow-hidden group" style={{ background: 'var(--surface-2)' }}>
-                <div className="w-full h-full flex flex-col items-center justify-center gap-2 group-hover:scale-105 transition-transform duration-500" style={{ color: 'var(--text-muted)' }}>
-                  <span className="text-3xl">🚀</span>
-                  <span className="text-xs font-medium">Project Preview</span>
-                </div>
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} preview`}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    className="group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center gap-2 group-hover:scale-105 transition-transform duration-500" style={{ color: 'var(--text-muted)' }}>
+                    <span className="text-3xl">🚀</span>
+                    <span className="text-xs font-medium">Project Preview</span>
+                  </div>
+                )}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.75)' }}>
                   <motion.a
                     href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="px-5 py-2 rounded-full text-sm font-semibold"
