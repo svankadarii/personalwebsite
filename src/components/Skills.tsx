@@ -73,26 +73,26 @@ export default function Skills() {
   }
 
   const tabVariants = {
-    active: { backgroundColor: "#333", color: "#fff" },
-    inactive: { backgroundColor: "transparent", color: "#ccc" },
+    active: { backgroundColor: "var(--surface-2)", color: "var(--accent)", borderColor: "var(--accent)" },
+    inactive: { backgroundColor: "transparent", color: "var(--text-muted)", borderColor: "transparent" },
   }
 
   return (
-    <section id="skills" className="py-20 bg-gray-100 dark:bg-black">
+    <section id="skills" className="py-20" style={{ background: 'var(--background)' }}>
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold text-center mb-12 text-black dark:text-white"
+          className="text-4xl font-bold text-center mb-12" style={{ color: 'var(--foreground)' } as React.CSSProperties}
         >
           Skills & Certifications
         </motion.h2>
 
         <div className="flex justify-center mb-10">
-          <div className="bg-gray-100 dark:bg-gray-900 p-1 rounded-lg border border-gray-300 dark:border-gray-700 flex space-x-1">
+          <div className="p-1 rounded-xl flex space-x-1" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
             <motion.button
               onClick={() => setActiveTab('skills')}
-              className="px-4 py-1 sm:px-6 sm:py-2 rounded-md text-sm font-medium transition-colors"
+              className="px-4 py-1 sm:px-6 sm:py-2 rounded-lg text-sm font-medium transition-colors border"
               animate={activeTab === 'skills' ? 'active' : 'inactive'}
               variants={tabVariants}
               initial={false}
@@ -101,7 +101,7 @@ export default function Skills() {
             </motion.button>
             <motion.button
               onClick={() => setActiveTab('certifications')}
-              className="px-4 py-1 sm:px-6 sm:py-2 rounded-md text-sm font-medium transition-colors"
+              className="px-4 py-1 sm:px-6 sm:py-2 rounded-lg text-sm font-medium transition-colors border"
               animate={activeTab === 'certifications' ? 'active' : 'inactive'}
               variants={tabVariants}
               initial={false}
@@ -126,16 +126,19 @@ export default function Skills() {
                   <motion.div
                     key={skillGroup.category}
                     variants={itemVariants}
-                    className="bg-white dark:bg-[#181c2c] p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700 hover:border-[color:var(--accent)]"
+                    className="p-4 sm:p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+                    style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+                    onMouseEnter={e => ((e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)')}
+                    onMouseLeave={e => ((e.currentTarget as HTMLElement).style.borderColor = 'var(--border)')}
                   >
-                    <h3 className="text-lg sm:text-xl font-semibold mb-4 text-black dark:text-white">{skillGroup.category}</h3>
+                    <h3 className="text-lg sm:text-xl font-semibold mb-4" style={{ color: 'var(--foreground)' }}>{skillGroup.category}</h3>
                     <div className="flex flex-wrap gap-1 sm:gap-2">
                       {skillGroup.items.map((skill) => (
                         <motion.span
                           key={skill}
                           whileHover={{ scale: 1.05, backgroundColor: "var(--accent)" }}
                           whileTap={{ scale: 0.95 }}
-                          className="px-2 py-0.5 sm:px-3 sm:py-1 bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-full text-xs sm:text-sm cursor-pointer transition-colors"
+                          className="px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm cursor-pointer transition-colors" style={{ background: 'var(--surface-2)', color: 'var(--text-muted)' }}
                         >
                           {skill}
                         </motion.span>
@@ -159,14 +162,17 @@ export default function Skills() {
                     <motion.div
                         key={index}
                         variants={itemVariants}
-                        className="flex items-center gap-3 sm:gap-4 bg-white dark:bg-[#181c2c] p-3 sm:p-4 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 hover:border-[color:var(--accent)] transition-border duration-200"
+                        className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl shadow-md transition-all duration-200"
+                        style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+                        onMouseEnter={e => ((e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)')}
+                        onMouseLeave={e => ((e.currentTarget as HTMLElement).style.borderColor = 'var(--border)')}
                     >
                         <div className="flex-shrink-0 text-[color:var(--accent)]">
                              {cert.icon ? <cert.icon size={24} className="sm:h-7 sm:w-7"/> : <FaCertificate size={24} className="sm:h-7 sm:w-7"/>}
                         </div>
                         <div className="flex-grow">
-                            <h4 className="font-semibold text-sm sm:text-base text-black dark:text-white">{cert.name}</h4>
-                            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{cert.issuer} - {cert.date}</p>
+                            <h4 className="font-semibold text-sm sm:text-base" style={{ color: 'var(--foreground)' }}>{cert.name}</h4>
+                            <p className="text-xs sm:text-sm" style={{ color: 'var(--text-muted)' }}>{cert.issuer} - {cert.date}</p>
                         </div>
                         {cert.credentialLink && cert.credentialLink !== '#' && (
                             <a

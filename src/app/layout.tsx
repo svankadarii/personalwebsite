@@ -1,12 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import SocialSidebar from "@/components/SocialSidebar";
+
 import FollowCursor from "@/components/FollowCursor";
 import Header from "@/components/Header";
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Srini Vankadari",
@@ -22,17 +32,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth scroll-pt-20" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`} suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth scroll-pt-20 dark" suppressHydrationWarning>
+      <body className={`${outfit.variable} ${inter.variable} font-[family-name:var(--font-outfit)] antialiased`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
           disableTransitionOnChange
         >
           <Header />
-          <SocialSidebar />
-          <FollowCursor color="#c7a42180" />
+
+          <FollowCursor color="#c9a84c60" />
           {children}
         </ThemeProvider>
       </body>

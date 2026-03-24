@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
-import Modal from 'react-modal'
 import Image from 'next/image' // Import Image for logos
 
 // Define interfaces for experience data
@@ -99,11 +99,6 @@ const experienceData: ExperienceData = {
   ],
 }
 
-// Set app element for accessibility (usually in a layout or app file, but here for simplicity)
-// Consider moving this to layout.tsx if using modals elsewhere
-if (typeof window !== 'undefined') {
-  Modal.setAppElement('body');
-}
 
 export default function Experience() {
   const [activeTab, setActiveTab] = useState<'professional' | 'leadership'>('professional')
@@ -117,14 +112,31 @@ export default function Experience() {
 
   const closeModal = () => {
     setModalIsOpen(false);
-    setSelectedExperience(null); // Clear selection on close
+    setSelectedExperience(null);
   };
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (modalIsOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [modalIsOpen]);
+
+  // Close on ESC key
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeModal(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   const activeExperiences = experienceData[activeTab]
 
   const tabVariants = {
-    active: { backgroundColor: "#333", color: "#fff" },
-    inactive: { backgroundColor: "transparent", color: "#ccc" },
+    active: { backgroundColor: "var(--surface-2)", color: "var(--accent)", borderColor: "var(--accent)" },
+    inactive: { backgroundColor: "transparent", color: "var(--text-muted)", borderColor: "transparent" },
   }
 
   const contentVariants = {
@@ -133,22 +145,22 @@ export default function Experience() {
   }
 
   return (
-    <section id="experience" className="pt-10 pb-20 bg-white dark:bg-black">
+    <section id="experience" className="pt-10 pb-20" style={{ background: 'var(--background)' }}>
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold text-center mb-12 text-black dark:text-white"
+          className="text-4xl font-bold text-center mb-12" style={{ color: 'var(--foreground)' } as React.CSSProperties}
         >
           Places I&apos;ve Worked
         </motion.h2>
 
         {/* Tabs - Reduced padding on mobile */}
         <div className="flex justify-center mb-8">
-          <div className="bg-gray-100 dark:bg-gray-900 p-1 rounded-lg border border-gray-300 dark:border-gray-700 flex space-x-1">
+          <div className="p-1 rounded-xl flex space-x-1" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
             <motion.button
               onClick={() => setActiveTab('professional')}
-              className="px-4 py-1 sm:px-6 sm:py-2 rounded-md text-sm font-medium transition-colors"
+              className="px-4 py-1 sm:px-6 sm:py-2 rounded-lg text-sm font-medium transition-colors border"
               animate={activeTab === 'professional' ? 'active' : 'inactive'}
               variants={tabVariants}
               initial={false}
@@ -157,7 +169,7 @@ export default function Experience() {
             </motion.button>
             <motion.button
               onClick={() => setActiveTab('leadership')}
-              className="px-4 py-1 sm:px-6 sm:py-2 rounded-md text-sm font-medium transition-colors"
+              className="px-4 py-1 sm:px-6 sm:py-2 rounded-lg text-sm font-medium transition-colors border"
               animate={activeTab === 'leadership' ? 'active' : 'inactive'}
               variants={tabVariants}
               initial={false}
@@ -183,10 +195,13 @@ export default function Experience() {
                 variants={contentVariants} // Inherit item animation
                 onClick={() => openModal(item)} 
                 // MODIFIED: Stack layout vertically on small screens
-                className="bg-gray-100 dark:bg-gray-900 p-4 sm:p-6 rounded-lg shadow-md border border-gray-300 dark:border-gray-700 flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-start cursor-pointer transition-colors duration-200 hover:border-[color:var(--accent)]"
+                className="p-4 sm:p-6 rounded-xl shadow-md flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-start cursor-pointer transition-all duration-200"
+                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)')}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.borderColor = 'var(--border)')}
               >
                 {/* Icon/Logo */}
-                <div className="flex-shrink-0 w-12 h-12 bg-gray-200 dark:bg-gray-800 rounded-md flex items-center justify-center text-[color:var(--accent)] relative overflow-hidden pointer-events-none">
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center relative overflow-hidden pointer-events-none" style={{ background: 'var(--surface-2)', color: 'var(--accent)' }}>
                   {item.logoSrc && <Image src={item.logoSrc} alt={`${item.company} logo`} fill style={{objectFit: 'contain'}} />} 
                   {item.icon && !item.logoSrc && <item.icon size={24} />}
                 </div>
@@ -195,24 +210,24 @@ export default function Experience() {
                 <div className="flex-grow pointer-events-none w-full text-center sm:text-left"> {/* Ensure text aligns center when stacked */} 
                   <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start mb-2">
                     <div className="mb-2 sm:mb-0">
-                      <h3 className="text-lg sm:text-xl font-semibold text-black dark:text-white">{item.title} @ <span className="text-[color:var(--accent)] font-medium">{item.company}</span></h3>
-                      <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{item.location} | {item.dates}</p>
+                      <h3 className="text-lg sm:text-xl font-semibold" style={{ color: 'var(--foreground)' }}>{item.title} @ <span style={{ color: 'var(--accent)' }} className="font-medium">{item.company}</span></h3>
+                      <p className="text-xs sm:text-sm" style={{ color: 'var(--text-muted)' }}>{item.location} | {item.dates}</p>
                     </div>
                     <button 
                       onClick={(e) => { e.stopPropagation(); openModal(item); }} 
-                      className="hidden sm:flex items-center gap-1 px-3 py-1 border border-gray-400 dark:border-gray-600 rounded-md text-xs text-gray-600 dark:text-gray-300 hover:border-[color:var(--accent)] hover:text-[color:var(--accent)] transition-colors pointer-events-auto"
+                      className="hidden sm:flex items-center gap-1 px-3 py-1 border rounded-md text-xs transition-colors pointer-events-auto" style={{ borderColor: 'var(--border)', color: 'var(--text-muted)' }} onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor='var(--accent)'; el.style.color='var(--accent)'; }} onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor='var(--border)'; el.style.color='var(--text-muted)'; }}
                     >
                       <FaExternalLinkAlt /> Details
                     </button>
                   </div>
-                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-sm mb-4" style={{ color: 'var(--text-muted)' }}>
                     {Array.isArray(item.description) ? item.description[0] : item.description.substring(0, 100) + (item.description.length > 100 ? '...' : '')}
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
                     {item.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-0.5 bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-full text-xs border border-gray-300 dark:border-gray-700"
+                        className="px-2 py-0.5 rounded-full text-xs border" style={{ background: 'var(--surface-2)', color: 'var(--text-muted)', borderColor: 'var(--border)' }}
                       >
                         {tech}
                       </span>
@@ -220,7 +235,7 @@ export default function Experience() {
                   </div>
                   <button 
                       onClick={(e) => { e.stopPropagation(); openModal(item); }} 
-                      className="sm:hidden mt-3 inline-flex items-center gap-1 px-3 py-1 border border-gray-400 dark:border-gray-600 rounded-md text-xs text-gray-600 dark:text-gray-300 hover:border-[color:var(--accent)] hover:text-[color:var(--accent)] transition-colors pointer-events-auto"
+                      className="sm:hidden mt-3 inline-flex items-center gap-1 px-3 py-1 border rounded-md text-xs transition-colors pointer-events-auto" style={{ borderColor: 'var(--border)', color: 'var(--text-muted)' }}
                     >
                       <FaExternalLinkAlt /> Details
                     </button>
@@ -231,92 +246,123 @@ export default function Experience() {
         </AnimatePresence>
       </div>
 
-      {/* --- MODAL COMPONENT --- */}
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Experience Details"
-        className="ModalContent"
-        overlayClassName="ModalOverlay"
-        closeTimeoutMS={300} // Match animation duration
-      >
-        {selectedExperience && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.3 }}
-            className="relative"
+      {/* ── Centered modal overlay (no portal, just fixed positioning) ── */}
+      {modalIsOpen && selectedExperience && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(0,0,0,0.82)',
+            zIndex: 9999,
+            padding: '1rem',
+            boxSizing: 'border-box' as const,
+          }}
+          onClick={closeModal}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              width: '100%',
+              maxWidth: '560px',
+              maxHeight: '85vh',
+              display: 'flex',
+              flexDirection: 'column' as const,
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: '0 32px 80px rgba(0,0,0,0.6)',
+            }}
           >
-            <button 
-              onClick={closeModal} 
-              className="absolute top-3 right-3 text-gray-400 hover:text-white transition-colors z-20"
-              aria-label="Close modal"
+            {/* Header — always visible */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '1rem',
+                padding: '1.25rem 1.5rem',
+                borderBottom: '1px solid var(--border)',
+                flexShrink: 0,
+              }}
             >
-              <FaTimes size={20} />
-            </button>
-            <div className="bg-gray-800 text-white rounded-lg overflow-hidden max-w-full mx-auto">
-              <div className="p-4">
-                <div className="flex items-start gap-3 mb-4">
-                  {selectedExperience.logoSrc && (
-                    <div className="w-12 h-12 relative bg-white rounded-md overflow-hidden flex-shrink-0">
-                      <Image src={selectedExperience.logoSrc} alt={`${selectedExperience.company} logo`} fill style={{objectFit: 'contain'}} />
-                    </div>
-                  )}
-                  {selectedExperience.icon && !selectedExperience.logoSrc && (
-                    <div className="w-12 h-12 bg-gray-700 rounded-md flex items-center justify-center text-[color:var(--accent)]">
-                      <selectedExperience.icon size={24} />
-                    </div>
-                  )}
-                  <div>
-                    <h3 className="text-xl font-bold text-white">
-                      {selectedExperience.title} @ <span className="text-[color:var(--accent)]">{selectedExperience.company}</span>
-                    </h3>
-                    <p className="text-sm text-gray-300">{selectedExperience.location} | {selectedExperience.dates}</p>
-                    {selectedExperience.companyLink && (
-                      <a 
-                        href={selectedExperience.companyLink} 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 mt-1 text-sm text-[color:var(--accent)] hover:underline"
-                      >
-                        Visit Company <FaExternalLinkAlt size={10} />
-                      </a>
-                    )}
-                  </div>
+              {selectedExperience.logoSrc && (
+                <div style={{ width: 48, height: 48, position: 'relative' as const, background: 'white', borderRadius: 8, overflow: 'hidden', flexShrink: 0 }}>
+                  <Image src={selectedExperience.logoSrc} alt={`${selectedExperience.company} logo`} fill style={{ objectFit: 'contain' }} />
                 </div>
-                
-                <div className="mb-4">
-                  <h4 className="text-base font-medium mb-2 text-[color:var(--accent)]">Description</h4>
-                  {Array.isArray(selectedExperience.description) ? (
-                    <ul className="list-disc pl-4 space-y-1.5">
-                      {selectedExperience.description.map((item, i) => (
-                        <li key={i} className="text-sm text-gray-200">{item}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="text-sm text-gray-200">{selectedExperience.description}</p>
-                  )}
+              )}
+              {selectedExperience.icon && !selectedExperience.logoSrc && (
+                <div style={{ width: 48, height: 48, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--surface-2)', color: 'var(--accent)', flexShrink: 0 }}>
+                  <selectedExperience.icon size={24} />
                 </div>
-                
-                <div>
-                  <h4 className="text-base font-medium mb-2 text-[color:var(--accent)]">Technologies</h4>
-                  <div className="flex flex-wrap gap-1.5">
-                    {selectedExperience.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-0.5 bg-gray-700 text-white rounded-full text-xs"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+              )}
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: 'var(--foreground)', lineHeight: 1.3 }}>
+                  {selectedExperience.title} @ <span style={{ color: 'var(--accent)' }}>{selectedExperience.company}</span>
+                </h3>
+                <p style={{ margin: '0.25rem 0 0', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                  {selectedExperience.location} · {selectedExperience.dates}
+                </p>
+                {selectedExperience.companyLink && (
+                  <a href={selectedExperience.companyLink} target="_blank" rel="noopener noreferrer"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginTop: 4, fontSize: '0.75rem', color: 'var(--accent)', textDecoration: 'none' }}>
+                    Visit Company <FaExternalLinkAlt size={9} />
+                  </a>
+                )}
+              </div>
+              <button
+                onClick={closeModal}
+                aria-label="Close"
+                style={{
+                  flexShrink: 0, width: 32, height: 32, borderRadius: '50%',
+                  border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: 'var(--surface-2)', color: 'var(--text-muted)', transition: 'color 0.15s',
+                }}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = 'var(--foreground)')}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'var(--text-muted)')}
+              >
+                <FaTimes size={13} />
+              </button>
+            </div>
+
+            {/* Body — scrollable */}
+            <div style={{ overflowY: 'auto' as const, padding: '1.25rem 1.5rem', flex: 1 }}>
+              <div style={{ marginBottom: '1.25rem' }}>
+                <h4 style={{ margin: '0 0 0.75rem', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'var(--accent)' }}>
+                  Description
+                </h4>
+                <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column' as const, gap: '0.6rem' }}>
+                  {(Array.isArray(selectedExperience.description) ? selectedExperience.description : [selectedExperience.description]).map((point, i) => (
+                    <li key={i} style={{ display: 'flex', gap: '0.6rem', fontSize: '0.85rem', lineHeight: 1.6, color: 'var(--text-muted)' }}>
+                      <span style={{ marginTop: 7, width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 style={{ margin: '0 0 0.75rem', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'var(--accent)' }}>
+                  Technologies
+                </h4>
+                <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.4rem' }}>
+                  {selectedExperience.technologies.map(tech => (
+                    <span key={tech} style={{ padding: '0.2rem 0.7rem', borderRadius: 999, fontSize: '0.75rem', fontWeight: 500, background: 'var(--surface-2)', color: 'var(--text-muted)', border: '1px solid var(--border)' }}>
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
-          </motion.div>
-        )}
-      </Modal>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

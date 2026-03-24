@@ -1,71 +1,119 @@
 @import "tailwindcss";
 
+/* ── Dark mode (default) ── */
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
-  --accent: #000033; /* Very Dark Blue for light mode */
+  --background: #0d0d0d;
+  --foreground: #f0ede8;
+  --accent: #c9a84c;
+  --accent-hover: #e8c87a;
+  --accent-muted: rgba(201, 168, 76, 0.15);
+  --surface: #161616;
+  --surface-2: #1e1e1e;
+  --border: rgba(201, 168, 76, 0.2);
+  --text-muted: #9a9289;
+  --header-bg: rgba(13, 13, 13, 0.88);
+  --header-border: rgba(201, 168, 76, 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #ffffff;
-    --accent: #6495ED; /* Cornflower Blue for dark mode */
-  }
+/* ── Light mode ── */
+html.light {
+  --background: #faf8f5;
+  --foreground: #1a1714;
+  --accent: #b5892e;
+  --accent-hover: #c9a84c;
+  --accent-muted: rgba(181, 137, 46, 0.12);
+  --surface: #f0ece5;
+  --surface-2: #e8e2d8;
+  --border: rgba(181, 137, 46, 0.22);
+  --text-muted: #6b5e50;
+  --header-bg: rgba(250, 248, 245, 0.9);
+  --header-border: rgba(181, 137, 46, 0.15);
+}
+
+html {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: 'Outfit', 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  animation: fadeInPage 0.6s ease-out both;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+@keyframes fadeInPage {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background-color: var(--accent);
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 0.85s step-end infinite;
+  border-radius: 1px;
 }
 
 /* --- React Modal Styles --- */
 .ModalOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.85); /* Darker overlay */
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.82);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
   opacity: 0;
   transition: opacity 300ms ease-in-out;
 }
 
-.ReactModal__Overlay--after-open{
-    opacity: 1;
+.ReactModal__Overlay--after-open {
+  opacity: 1;
 }
 
-.ReactModal__Overlay--before-close{
-    opacity: 0;
+.ReactModal__Overlay--before-close {
+  opacity: 0;
 }
 
 .ModalContent {
   position: relative;
-  max-width: 500px;
-  width: 90%;
-  max-height: 90vh;
+  width: 100%;
+  max-width: 540px;
+  max-height: 85vh;
   overflow-y: auto;
-  background: #181c2c; /* Changed background to dark blue */
+  background: var(--surface);
   padding: 1.5rem;
-  border-radius: 8px;
+  border-radius: 14px;
   outline: none;
-  border: 1px solid #555; /* Slightly lighter border for contrast */
-  color: #ffffff; /* Changed text to white for contrast */
+  border: 1px solid var(--border);
+  color: var(--foreground);
   transform: scale(0.95);
   opacity: 0;
   transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
 }
 
-.ReactModal__Content--after-open{
-    opacity: 1;
-    transform: scale(1);
+.ReactModal__Content--after-open {
+  opacity: 1;
+  transform: scale(1);
 }
 
-.ReactModal__Content--before-close{
-    opacity: 0;
-    transform: scale(0.95);
+.ReactModal__Content--before-close {
+  opacity: 0;
+  transform: scale(0.95);
 }
