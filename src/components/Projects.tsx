@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import Image from 'next/image'
+import { useState } from 'react'
+import Modal from './Modal'
 
 const projects = [
   {
@@ -16,8 +18,8 @@ const projects = [
     title: 'Campus Saftety App',
     description: 'Campus safety app that allows users to report safety issues and get help walking back from Campus Walkers',
     technologies: ['AWS', 'GOLANG', 'EC2', 'React Native', 'SQL', 'MapboxAPI', 'Docker'],
-    image: '/project2.jpg',
-    link: '#',
+    image: '/protoxpng.png',
+    link: 'https://github.com/svankadarii/Protox---Campus-Safety-App',
   },
   {
     title: 'Seurity AI Agent',
@@ -29,6 +31,8 @@ const projects = [
 ]
 
 export default function Projects() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -113,6 +117,119 @@ export default function Projects() {
             </motion.div>
           ))}
         </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="flex justify-center mt-12"
+        >
+          <div className="p-1 rounded-xl flex" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsModalOpen(true)}
+              className="px-4 py-1 sm:px-6 sm:py-2 rounded-lg text-sm font-medium transition-colors border"
+              style={{ 
+                backgroundColor: 'var(--surface-2)', 
+                borderColor: 'var(--accent)', 
+                color: 'var(--accent)' 
+              }}
+            >
+              View More Projects
+            </motion.button>
+          </div>
+        </motion.div>
+
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center" style={{ color: 'var(--foreground)' }}>
+            All Projects
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project) => (
+              <div 
+                key={project.title} 
+                className="flex flex-col h-full gap-5 p-5 rounded-xl shadow-md transition-all duration-200 cursor-pointer group" 
+                style={{ 
+                  background: 'var(--surface)', 
+                  border: '1px solid var(--border)' 
+                }}
+                onMouseEnter={e => { 
+                  const el = e.currentTarget as HTMLElement; 
+                  el.style.borderColor = 'var(--accent)'; 
+                }}
+                onMouseLeave={e => { 
+                  const el = e.currentTarget as HTMLElement; 
+                  el.style.borderColor = 'var(--border)'; 
+                }}
+              >
+                {/* Image Section */}
+                {project.image ? (
+                  <div className="relative w-full aspect-video rounded-lg overflow-hidden flex-shrink-0" style={{ background: 'var(--surface-2)' }}>
+                    <Image 
+                      src={project.image} 
+                      alt={project.title} 
+                      fill 
+                      style={{ objectFit: 'cover' }} 
+                    />
+                  </div>
+                ) : (
+                  <div className="w-full aspect-video rounded-lg flex flex-col items-center justify-center flex-shrink-0" style={{ background: 'var(--surface-2)', color: 'var(--text-muted)' }}>
+                    <span className="text-4xl mb-2">🚀</span>
+                    <span className="text-sm font-medium">Project Preview</span>
+                  </div>
+                )}
+                
+                {/* Content Section */}
+                <div className="flex flex-col flex-grow">
+                  <h3 className="text-xl font-bold mb-2 line-clamp-2" style={{ color: 'var(--foreground)' }}>
+                    {project.title}
+                  </h3>
+                  <p className="mb-4 text-sm leading-relaxed opacity-90 line-clamp-3" style={{ color: 'var(--text-muted)' }}>
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.slice(0, 6).map(tech => (
+                      <span 
+                        key={tech} 
+                        className="px-2 py-1 rounded-md text-[11px] font-semibold tracking-wide uppercase" 
+                        style={{ 
+                          background: 'var(--surface)', 
+                          color: 'var(--text-muted)',
+                          border: '1px solid var(--border)'
+                        }}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.technologies.length > 6 && (
+                      <span className="px-2 py-1 rounded-md text-[11px] font-semibold tracking-wide uppercase" style={{ background: 'var(--surface)', color: 'var(--text-muted)', border: '1px solid var(--border)' }}>
+                        +{project.technologies.length - 6}
+                      </span>
+                    )}
+                  </div>
+                  
+                  {project.link !== '#' && (
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="inline-flex items-center gap-2 mt-auto text-sm font-bold hover:opacity-80 transition-opacity w-max" 
+                      style={{ color: 'var(--accent)' }}
+                    >
+                      View Details 
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Modal>
       </div>
     </section>
   )
