@@ -47,7 +47,7 @@ const certifications: CertificationItem[] = [
 ];
 
 export default function Skills() {
-  const [activeTab, setActiveTab] = useState<'skills' | 'certifications'>('skills');
+  const [activeTab, setActiveTab] = useState<'skills' | 'certifications'>('certifications');
 
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -91,15 +91,6 @@ export default function Skills() {
         <div className="flex justify-center mb-10">
           <div className="p-1 rounded-xl flex space-x-1" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
             <motion.button
-              onClick={() => setActiveTab('skills')}
-              className="px-4 py-1 sm:px-6 sm:py-2 rounded-lg text-sm font-medium transition-colors border"
-              animate={activeTab === 'skills' ? 'active' : 'inactive'}
-              variants={tabVariants}
-              initial={false}
-            >
-              Skills
-            </motion.button>
-            <motion.button
               onClick={() => setActiveTab('certifications')}
               className="px-4 py-1 sm:px-6 sm:py-2 rounded-lg text-sm font-medium transition-colors border"
               animate={activeTab === 'certifications' ? 'active' : 'inactive'}
@@ -107,6 +98,15 @@ export default function Skills() {
               initial={false}
             >
               Certifications
+            </motion.button>
+            <motion.button
+              onClick={() => setActiveTab('skills')}
+              className="px-4 py-1 sm:px-6 sm:py-2 rounded-lg text-sm font-medium transition-colors border"
+              animate={activeTab === 'skills' ? 'active' : 'inactive'}
+              variants={tabVariants}
+              initial={false}
+            >
+              Skills
             </motion.button>
           </div>
         </div>

@@ -8,22 +8,22 @@ import Modal from './Modal'
 
 const projects = [
   {
-    title: 'Amazon Price Tracker Web Scrapper',
+    title: 'Amazon Price Tracker Web Scraper',
     description: 'Scrape Amazon Products and get the price history',
     technologies: ['Python', 'Next.js', 'SQL', 'BeautifulSoup', 'D3.js', 'FastAPI'],
     image: '/amazonpricetrackerpng.png',
     link: 'https://github.com/svankadarii/AmazonPriceTracker',
   },
   {
-    title: 'Campus Saftety App',
+    title: 'Campus Safety App',
     description: 'Campus safety app that allows users to report safety issues and get help walking back from Campus Walkers',
     technologies: ['AWS', 'GOLANG', 'EC2', 'React Native', 'SQL', 'MapboxAPI', 'Docker'],
     image: '/protoxpng.png',
     link: 'https://github.com/svankadarii/Protox---Campus-Safety-App',
   },
   {
-    title: 'Seurity AI Agent',
-    description: 'AI Agent that goes through websites and finds vulnerabilities (Under Developement)',
+    title: 'Security AI Agent',
+    description: 'AI Agent that goes through websites and finds vulnerabilities (Under Development)',
     technologies: ['Python', 'OpenAI API', 'PostgreSQL', 'Docker', 'Node.js', 'LLM Integration'],
     image: '/aiagentui.png',
     link: '#',

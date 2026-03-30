@@ -9,7 +9,7 @@ import { FaLinkedinIn, FaGithub, FaEnvelope } from 'react-icons/fa'
 const typingPhrases = [
   "Software Engineer",
   "Product + Tech Enthusiast",
-  "Soccer Player & Fan"
+  // "Soccer Player & Fan"
 ]
 
 function useTypingEffect(phrases: string[]) {
