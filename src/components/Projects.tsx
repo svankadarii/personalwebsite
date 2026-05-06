@@ -22,6 +22,13 @@ const projects = [
     link: 'https://github.com/svankadarii/Protox---Campus-Safety-App',
   },
   {
+  title: 'Portfolio Rebalancer',
+  description: 'AI-powered financial analytics platform that analyzes investment portfolios, calculates allocation drift, and generates personalized rebalancing strategies using Claude API. Reduces API costs by 40% through intelligent batch processing.',
+  technologies: ['Rails', 'React', 'TypeScript', 'PostgreSQL', 'Claude API', 'TailwindCSS', 'Sidekiq', 'AWS'],
+  image: '#',
+  link: 'https://github.com/svankadarii/Portfolio-Rebuild', 
+  },
+  {
     title: 'Security AI Agent',
     description: 'AI Agent that goes through websites and finds vulnerabilities (Under Development)',
     technologies: ['Python', 'OpenAI API', 'PostgreSQL', 'Docker', 'Node.js', 'LLM Integration'],
