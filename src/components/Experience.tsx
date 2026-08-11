@@ -31,7 +31,33 @@ interface ExperienceData {
 const experienceData: ExperienceData = {
   professional: [
     {
-      // icon: FaBuilding, 
+      logoSrc: "/pepsico.png",
+      title: 'Incoming Software Engineer',
+      company: 'Interac Corp.',
+      location: 'Toronto, ON',
+      dates: 'Sep 2026 - Dec 2026',
+      shortDescription: 'Working on Infrastrucutre that over 30 million Canadians use everyday!.',
+      description: [
+        <>Building scalable  engineering and AI solutions that scale and automate infrastructure.</>,
+      ],
+      technologies: ['Python', 'AWS', 'Terraform', 'Agentic AI', 'Machine Learning', 'AWS Lambda', 'MLOps', 'CI/CD', 'Docker', 'Kubernetes'],
+    },
+    {
+      logoSrc: "/bmo.jpg",
+      title: 'Software Developer Intern',
+      company: 'BMO',
+      location: 'Toronto, ON',
+      dates: 'May 2026 - Aug 2026',
+      shortDescription: 'Migrating critical legacy applications to Git, supporting platform engineering with DevOps pipelines, and testing applications concurrently.',
+      description: [
+        <>Migrating critical legacy applications to Git, modernizing version control practices and improving team collaboration across the development lifecycle.</>,
+        <>Supporting the platform engineering team in building and maintaining DevOps pipelines, enabling automated builds, testing, and deployments.</>,
+        <>Testing applications concurrently to validate functionality, performance, and reliability across multiple workstreams simultaneously.</>,
+      ],
+      technologies: ['Git', 'DevOps', 'CI/CD', 'Testing', 'Jenkins','Ansible','Apache Spark'],
+    },
+    {
+      // icon: FaBuilding,
       logoSrc: "/bmo.jpg",
       title: 'SoftwareDeveloper Intern',
       company: 'BMO',
