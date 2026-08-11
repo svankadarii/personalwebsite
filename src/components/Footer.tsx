@@ -10,9 +10,9 @@ export default function Footer() {
     if (didIncrement.current) return
     didIncrement.current = true
 
-    fetch('https://api.counterapi.dev/v1/srini-vankadari/portfolio/up')
+    fetch('/api/views', { method: 'POST' })
       .then(res => res.json())
-      .then(data => setViews(data.count))
+      .then(data => setViews(typeof data.views === 'number' ? data.views : null))
       .catch(() => setViews(null))
   }, [])
 
@@ -28,7 +28,7 @@ export default function Footer() {
 
         <span className="text-sm flex items-center gap-1.5" style={{ color: 'var(--text-muted)' }}>
           👁
-          {views !== null
+          {typeof views === 'number'
             ? <>{views.toLocaleString()} views</>
             : <span style={{ opacity: 0.4 }}>— views</span>
           }

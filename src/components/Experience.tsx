@@ -31,7 +31,7 @@ interface ExperienceData {
 const experienceData: ExperienceData = {
   professional: [
     {
-      logoSrc: "/pepsico.png",
+      logoSrc: "/interac.png",
       title: 'Incoming Software Engineer',
       company: 'Interac Corp.',
       location: 'Toronto, ON',
