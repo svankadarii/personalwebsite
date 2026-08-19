@@ -244,7 +244,7 @@ export default function Hero() {
               }}
             >
               <Image
-                src="/KinHeadShot.jpg"
+                src="/Srini Vankadari Headshot.jpeg"
                 alt="Srini Vankadari"
                 fill
                 style={{ objectFit: 'cover', objectPosition: 'top center' }}
