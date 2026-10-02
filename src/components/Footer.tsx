@@ -26,6 +26,10 @@ export default function Footer() {
           © 2026 Srini Vankadari
         </span>
 
+        <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
+          Last updated Oct 2026
+        </span>
+
         <span className="text-sm flex items-center gap-1.5" style={{ color: 'var(--text-muted)' }}>
           👁
           {typeof views === 'number'
