@@ -32,7 +32,7 @@ const experienceData: ExperienceData = {
   professional: [
     {
       logoSrc: "/Interac.png",
-      title: 'Incoming Software Engineer',
+      title: 'Software Engineer Intern',
       company: 'Interac Corp.',
       location: 'Toronto, ON',
       dates: 'Sep 2026 - Dec 2026',
