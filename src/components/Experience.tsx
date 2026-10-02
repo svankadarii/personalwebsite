@@ -36,9 +36,11 @@ const experienceData: ExperienceData = {
       company: 'Interac Corp.',
       location: 'Toronto, ON',
       dates: 'Sep 2026 - Dec 2026',
-      shortDescription: 'Working on Infrastrucutre that over 30 million Canadians use everyday!.',
+      shortDescription: 'Driving FinOps and cloud cost initiatives at Canada\'s national payment network, processing 7B+ transactions annually.',
       description: [
-        <>Building scalable  engineering and AI solutions that scale and automate infrastructure.</>,
+        <>Driving FinOps initiatives to reduce cloud spend and improve governance across <b>16,000+</b> AWS resources through serverless automation and policy-as-code enforcement.</>,
+        <>Developing a serverless AWS automation with Lambda, CloudWatch, API Gateway, and SSM to detect idle non-production ECS/RDS environments and surface Teams-based shutdown recommendations, with a POC projecting a <b>60–65%</b> reduction in non-prod compute costs at under <b>$10/month</b>.</>,
+        <>Automating tag governance at scale using Python (boto3), AWS Config, and Sentinel — flagging missing required tags, blocking non-compliant Terraform deployments through policy-as-code checks, and building bulk remediation tooling for existing non-compliant resources.</>,
       ],
       technologies: ['Python', 'AWS', 'Terraform', 'Agentic AI', 'Machine Learning', 'AWS Lambda', 'MLOps', 'CI/CD', 'Docker', 'Kubernetes'],
     },

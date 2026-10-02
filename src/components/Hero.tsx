@@ -137,7 +137,7 @@ export default function Hero() {
               className="text-sm sm:text-base leading-relaxed mb-7"
               style={{ color: 'var(--text-muted)', maxWidth: '420px' }}
             >
-              I build clean, scalable products at the intersection of great engineering and intuitive design. Passionate about turning ideas into real, impactful software.
+              I build and ship software — from scalable cloud infrastructure to full-stack products. Passionate about automation, clean systems, and turning ideas into things that actually work.
             </motion.p>
 
             {/* Primary buttons */}
